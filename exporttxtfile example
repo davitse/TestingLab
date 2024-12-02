@@ -1,0 +1,35 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class exportfile {
+    public static void main(String[] args) {
+        // Create a Scanner object to read user input
+        Scanner scanner = new Scanner(System.in);
+        String fileName = "output.txt";
+
+        try (FileWriter writer = new FileWriter(fileName)) {
+            System.out.println("Enter text to write to the file (type 'exit' to quit):");
+            while (true) {
+                // Read user input
+                String input = scanner.nextLine();
+
+                // Check for exit condition
+                if ("exit".equalsIgnoreCase(input)) {
+                    System.out.println("Exiting and saving to file...");
+                    break;
+                }
+
+                // Write input to the file
+                writer.write(input + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            System.err.println("An error occurred while writing to the file: " + e.getMessage());
+        } finally {
+            // Close the scanner
+            scanner.close();
+        }
+
+        System.out.println("Content has been saved to " + fileName);
+    }
+}
